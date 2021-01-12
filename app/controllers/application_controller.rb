@@ -33,10 +33,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/registration' do
-    # add a way to check if user already exist in the database 
     user = User.new(username: params[:username], password: params[:password])
 
-    if user.save
+    if in_db?(user) && user.save
       session[:user_id] = user.id
       redirect to '/posts'
     else
@@ -52,7 +51,10 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-    
+     
+    def in_db?(username) # this one could be a User class method 
+      User.find_by(username: username) == nil ? false : true 
+    end
   end
 
   

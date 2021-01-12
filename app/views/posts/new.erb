@@ -1,0 +1,13 @@
+<div>
+  <p>user logged in is <%= session[:user_id] %></p>
+  <% if logged_in? %>
+    <form action="/posts/new" method="POST">
+      <label for="title"><h3>Title:</h3></label>
+      <input type="text" name="title" id="title">
+      <label for="content"><h3>Content:</h3></label>
+      <textarea name="content" id="" cols="30" rows="10"></textarea> 
+      <br>
+      <input type="submit">
+    </form>
+  <% end %>
+</div>
