@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210112001718) do
+ActiveRecord::Schema.define(version: 20210112204511) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
@@ -24,11 +24,12 @@ ActiveRecord::Schema.define(version: 20210112001718) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "likes",      default: 0
+    t.string   "name"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
   end
 
 end
