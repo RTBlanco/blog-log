@@ -71,6 +71,10 @@ class ApplicationController < Sinatra::Base
       post = Post.find(params[:"posts/id"])
       like(post)
       redirect to "/posts/#{post.id}"
+    when 'account'
+      post = Post.find(params[:account])
+      like(post)
+      redirect to "/users/#{post.user.username}"
     end
     # puts params 
     # redirect to '/posts'

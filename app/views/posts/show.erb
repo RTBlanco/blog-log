@@ -1,5 +1,6 @@
 <div>
   <h1><%= @post.title %></h1>
+  <p>By:<a href="/users/<%= @post.user.username %>"><%= @post.user.username%></a></p>
   <p><%= @post.content %></p>
   <% if @post.likes > 0 %>  
     <p>likes: <%= @post.likes %></p>
