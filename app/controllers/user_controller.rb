@@ -1,7 +1,7 @@
 class UserController < ApplicationController 
 
   get '/users/:user' do 
-    if in_db?(params[:user])
+    if user_in_db?(params[:user])
       @user = User.find_by(username: params[:user])
       @posts = @user.posts
       erb :"user/show"
@@ -9,13 +9,23 @@ class UserController < ApplicationController
       redirect to '/posts'
     end
   end
-
+ 
   get '/account' do 
     @user = current_user
-    erb :'user/edit'
+    @posts = @user.posts
+    erb :'user/show'
   end
 
-  patch '/account' do 
+  get '/account/edit' do
+    if logged_in? 
+      @user = current_user
+      erb :'user/edit'
+    else
+      redirect to '/posts'
+    end
+  end
+
+  patch '/account/edit' do 
     @user = current_user
     if !params[:name].empty?
       @user.name = params[:name]
@@ -28,8 +38,9 @@ class UserController < ApplicationController
     redirect to "/account"
   end
 
-  delete '/account' do 
-    @user = User.find(session[:user_id])
+  delete '/account/edit' do 
+    @user = currrent_user
+    @user.posts.each {|post| post.delete}
     @user.delete
     redirect to '/logout'
   end

@@ -4,20 +4,32 @@ class PostController < ApplicationController
     erb :'posts/index'
   end
 
-  get '/posts/new' do 
-    erb :'posts/new'
+  get '/posts/new' do
+    if logged_in? 
+      erb :'posts/new'
+    else 
+      redirect to '/posts'
+    end
   end
   
   post '/posts/new' do 
     # binding.pry
-    post = Post.create(title: params[:title], content: params[:content])
-    current_user.posts << post
-    redirect to "/posts/#{post.id}"
+    post = Post.new(title: params[:title], content: params[:content])
+    if post.save
+      current_user.posts << post
+      redirect to "/posts/#{post.id}"
+    else
+      redirect to '/posts/new'
+    end
   end
 
   get '/posts/:id' do 
-    @post = Post.find(params[:id])
-    erb :"posts/show"
+    if post_in_db?(params[:id])
+      @post = Post.find(params[:id])
+      erb :"posts/show"
+    else
+      redirect to '/posts'
+    end
   end
 
   get '/posts/:id/edit' do

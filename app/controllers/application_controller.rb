@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
   post '/registration' do
     user = User.new(username: params[:username], password: params[:password], name: params[:name])
 
-    if !in_db?(user.username) && user.save
+    if !user_in_db?(user.username) && user.save
       session[:user_id] = user.id
       redirect to '/posts'
     else
@@ -65,8 +65,12 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
      
-    def in_db?(username) # this one could be a User class method 
+    def user_in_db?(username) # this one could be a User class method 
       User.find_by(username: username) == nil ? false : true 
+    end
+
+    def post_in_db?(post_id)
+      Post.find_by(id: post_id) == nil ? false :true
     end
   end  
 end

@@ -1,7 +1,6 @@
 <div>
   <p>user logged in is <%= session[:user_id] %></p>
-  <% if logged_in? %>
-    <form action="/posts/new" method="POST">
+    <form action='/posts/new' method="POST">
       <label for="title"><h3>Title:</h3></label>
       <input type="text" name="title" id="title">
       <label for="content"><h3>Content:</h3></label>
@@ -9,5 +8,4 @@
       <br>
       <input type="submit">
     </form>
-  <% end %>
 </div>
