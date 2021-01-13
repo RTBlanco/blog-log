@@ -11,20 +11,27 @@ class UserController < ApplicationController
   end
 
   get '/account' do 
-    @user = User.find(session[:user_id])
+    @user = current_user
     erb :'user/edit'
   end
 
   patch '/account' do 
-    @user = User.find(session[:user_id])
-    @user.update(name: params[:name], password: params[:password])
+    @user = current_user
+    if !params[:name].empty?
+      @user.name = params[:name]
+    end
+
+    if !params[:password].empty?
+      @user.password = params[:password]
+    end
+    @user.save
     redirect to "/account"
   end
 
   delete '/account' do 
     @user = User.find(session[:user_id])
     @user.delete
-    redirect to '/posts'
+    redirect to '/logout'
   end
 
 end
