@@ -1,8 +1,7 @@
 <div>
   <% @posts.each do |post|%>
     <h1><%= post.title %></h1>
+    <h3>By: <%= post.user.username %></h3>
     <p><%= post.content %></p>
   <% end %>
-
-  
 </div>

@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do 
-    erb :'sessions/login'
+    if logged_in?
+      redirect to '/posts'
+    else
+      erb :'sessions/login'
+    end
   end
 
   get "/" do
@@ -29,18 +33,27 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do 
-    erb :'registrations/signup'
+    if logged_in?
+      redirect to '/posts'
+    else  
+      erb :'registrations/signup'
+    end
   end
 
   post '/registration' do
-    user = User.new(username: params[:username], password: params[:password])
+    user = User.new(username: params[:username], password: params[:password], name: params[:name])
 
-    if in_db?(user) && user.save
+    if !in_db?(user.username) && user.save
       session[:user_id] = user.id
       redirect to '/posts'
     else
       redirect to '/signup'
     end   
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/login' 
   end
 
   helpers do 
@@ -55,7 +68,5 @@ class ApplicationController < Sinatra::Base
     def in_db?(username) # this one could be a User class method 
       User.find_by(username: username) == nil ? false : true 
     end
-  end
-
-  
+  end  
 end
