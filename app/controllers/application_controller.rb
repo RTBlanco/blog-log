@@ -57,14 +57,32 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  post '/like/posts' do 
-    post = Post.find(params[:like])
-    post.likes += 1
-    post.save 
-    redirect to '/posts' 
+  post '/like' do 
+    # post = Post.find(params[:like])
+    # post.likes += 1
+    # post.save 
+    # binding.pry
+    case params.keys.first
+    when "posts"
+      post = Post.find(params[:posts])
+      like(post)
+      redirect to '/posts'
+    when "posts/id"
+      post = Post.find(params[:"posts/id"])
+      like(post)
+      redirect to "/posts/#{post.id}"
+    end
+    # puts params 
+    # redirect to '/posts'
   end
 
-  helpers do 
+  helpers do
+    
+    def like(post)
+      post.likes += 1
+      post.save
+    end
+
     def logged_in?
       !!session[:user_id]
     end

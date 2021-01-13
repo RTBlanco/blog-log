@@ -1,5 +1,14 @@
 <div>
   <h1><%= @post.title %></h1>
   <p><%= @post.content %></p>
-  <a href="/posts/<%= @post.id %>/edit"><button>edit</button></a>
+  <% if @post.likes > 0 %>  
+    <p>likes: <%= @post.likes %></p>
+  <% end %>
+  <% if logged_in? && @post.user.id == current_user.id %>
+      <a href="/posts/<%= @post.id %>/edit"><button>Edit</button></a>
+  <% end %>
+  
+  <% if logged_in? && @post.user.id != current_user.id %>
+    <form action="/like" method="POST"><button type="submit" name='posts/id' value="<%= @post.id %>">Like</button></form>
+  <% end %>
 </div>
