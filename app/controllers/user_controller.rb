@@ -45,4 +45,7 @@ class UserController < ApplicationController
     redirect to '/logout'
   end
 
+  get '/account/feed' do
+    # TODO: start to add the followers content
+  end
 end

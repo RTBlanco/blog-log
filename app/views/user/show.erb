@@ -3,5 +3,12 @@
   <% @posts.each do |post| %>
     <h1><%= post.title %></h1>
     <p><%= post.content %></p>
+    <% if logged_in? && @user.id == current_user.id %>
+      <a href=""><button>Edit</button></a>
+    <% end %>
+    <% if logged_in? && @user.id != current_user.id %>
+      <button>Like</button>
+    <% end %>
+
   <% end %>
 </div>
