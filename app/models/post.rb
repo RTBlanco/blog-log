@@ -3,4 +3,9 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
   validates :content, presence: true
+
+  def like
+    self.likes += 1
+    self.save
+  end
 end

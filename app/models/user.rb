@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
   has_many :followers, through: :following_users
 
   has_many :posts
+
+  def follow(user)
+    self.followees << user
+    self.save
+  end
 end

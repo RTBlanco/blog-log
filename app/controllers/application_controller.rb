@@ -62,25 +62,26 @@ class ApplicationController < Sinatra::Base
     case params.keys.first
     when "posts"
       post = Post.find(params[:posts])
-      like(post)
+      post.like
       redirect to '/posts'
     when "posts/id"
       post = Post.find(params[:"posts/id"])
-      like(post)
+      post.like
       redirect to "/posts/#{post.id}"
     when 'account'
       post = Post.find(params[:account])
-      like(post)
+      post.like
       redirect to "/users/#{post.user.username}"
     end
   end
 
+  post '/follow' do 
+# TODO: make logic for when pressing the follow button
+    user = User.find(params[:follow])
+    current_user.follow(user)
+  end
+
   helpers do
-    
-    def like(post)
-      post.likes += 1
-      post.save
-    end
 
     def logged_in?
       !!session[:user_id]

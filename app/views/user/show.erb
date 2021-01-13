@@ -1,18 +1,23 @@
 <div>
   <% if !logged_in? || @user.id != current_user.id %>
     <h1><%= @user.username %></h1>
-    <button>Follow</button> 
+    <% if logged_in? %>
+      <form action="/follow" method="POST"><button type="submit" name="follow" value="<%= @user.id %>">Follow</button></form>
+    <% end %>
   <% end %>
-  
+  <p>Followers: <%= @user.followers.size %> Following: <%= @user.followees.size %> </p>
   <% @posts.each do |post| %>
     <h1><%= post.title %></h1>
     <p><%= post.content %></p>
+
     <% if post.likes > 0 %>  
       <p>likes: <%= post.likes %></p>
     <% end %>
+
     <% if logged_in? && post.user.id != current_user.id %>
       <form action="/like" method="POST"><button type="submit" name='account' value="<%= post.id %>">Like</button></form>
     <% end %>
+
     <% if logged_in? && @user.id == current_user.id %>
       <a href="/posts/<%= post.id %>/edit"><button>Edit</button></a>
     <% end %>
