@@ -47,5 +47,6 @@ class UserController < ApplicationController
 
   get '/account/feed' do
     # TODO: start to add the followers content
+    erb :"user/feed"
   end
 end
