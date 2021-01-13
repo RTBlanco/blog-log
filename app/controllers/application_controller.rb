@@ -58,10 +58,7 @@ class ApplicationController < Sinatra::Base
 
 
   post '/like' do 
-    # post = Post.find(params[:like])
-    # post.likes += 1
-    # post.save 
-    # binding.pry
+ 
     case params.keys.first
     when "posts"
       post = Post.find(params[:posts])
@@ -76,8 +73,6 @@ class ApplicationController < Sinatra::Base
       like(post)
       redirect to "/users/#{post.user.username}"
     end
-    # puts params 
-    # redirect to '/posts'
   end
 
   helpers do
