@@ -1,10 +1,14 @@
 <div>
-  <h1><%= @user.username if !logged_in? || @user.id != current_user.id %></h1>
+  <% if !logged_in? || @user.id != current_user.id %>
+    <h1><%= @user.username %></h1>
+    <button>Follow</button> 
+  <% end %>
+  
   <% @posts.each do |post| %>
     <h1><%= post.title %></h1>
     <p><%= post.content %></p>
     <% if logged_in? && @user.id == current_user.id %>
-      <a href=""><button>Edit</button></a>
+      <a href="/posts/<%= post.id %>/edit"><button>Edit</button></a>
     <% end %>
     <% if logged_in? && @user.id != current_user.id %>
       <button>Like</button>

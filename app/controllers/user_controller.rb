@@ -5,6 +5,8 @@ class UserController < ApplicationController
       @user = User.find_by(username: params[:user])
       @posts = @user.posts
       erb :"user/show"
+    elsif params[:username] == current_user.username
+      redirect '/account'
     else
       redirect to '/posts'
     end
@@ -39,7 +41,7 @@ class UserController < ApplicationController
   end
 
   delete '/account/edit' do 
-    @user = currrent_user
+    @user = current_user
     @user.posts.each {|post| post.delete}
     @user.delete
     redirect to '/logout'

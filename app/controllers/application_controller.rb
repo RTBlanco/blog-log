@@ -56,6 +56,14 @@ class ApplicationController < Sinatra::Base
     redirect to '/login' 
   end
 
+
+  post '/like/posts' do 
+    post = Post.find(params[:like])
+    post.likes += 1
+    post.save 
+    redirect to '/posts' 
+  end
+
   helpers do 
     def logged_in?
       !!session[:user_id]

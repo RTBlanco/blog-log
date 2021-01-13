@@ -1,0 +1,16 @@
+<div>
+  <p>user logged in is <%= session[:user_id] %></p>
+    <form action='/posts/<%= @post.id %>' method="POST">
+      <input type="hidden" name="_method" id="hidden" value="PATCH">
+      <label for="title"><h3>Title:</h3></label>
+      <input type="text" name="title" id="title" value="<%= @post.title %>">
+      <label for="content"><h3>Content:</h3></label>
+      <textarea name="content" id="" cols="30" rows="10"><%= @post.content %></textarea> 
+      <br>
+      <input type="submit" value="Save">
+    </form>
+    <form action="/posts/<%= @post.id %>" method="POST">
+      <input type="hidden" name="_method" id="hidden" value="DELETE">
+      <input type="submit" value="Delete">
+    </form>
+</div>

@@ -1,5 +1,5 @@
 <div>
-  <form action="/account" method="POST">
+  <form action="/account/edit" method="POST">
     <input type="hidden" name="_method" id="hidden" value="PATCH">
     <label for="username">Username: <%= @user.username %></label>
     <br>
@@ -11,7 +11,7 @@
     <br>
     <input type="submit" value="Save">
   </form>
-  <form action="/account" method="POST">
+  <form action="/account/edit" method="POST">
     <input type="hidden" name="_method" id="hidden" value="DELETE">
     <input type="submit" value="Delete">
   </form>

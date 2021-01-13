@@ -33,6 +33,35 @@ class PostController < ApplicationController
   end
 
   get '/posts/:id/edit' do
+    if post_in_db?(params[:id])
+      @post = Post.find(params[:id])
+      if @post.user == current_user
+        erb :'posts/edit'
+      else
+        redirect to "/post/#{@post.id}"
+      end
+    else
+      redirect to "/posts"
+    end
+  end
+
+  patch '/posts/:id' do
+    post = Post.find(params[:id])
+    if !params[:title].empty?
+      post.title = params[:title]
+    end
+
+    if !params[:content].empty?
+      post.content = params[:content]
+    end
+    post.save
+    redirect to "/posts/#{post.id}"
+  end
+
+  delete '/posts/:id' do
+    post = Post.find(params[:id])
+    post.delete
+    redirect to "/account"
   end
 
 end
