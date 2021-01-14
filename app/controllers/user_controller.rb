@@ -49,7 +49,7 @@ class UserController < ApplicationController
 
   get '/account/feed' do
     # binding.pry
-    @posts = current_user.followees.map {|user| user.posts}.flatten
+    @posts = current_user.followees.map {|user| user.posts}.flatten.reverse()
     erb :"user/feed"
   end
 end

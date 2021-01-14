@@ -1,3 +1,8 @@
+<% if flash.has?(:message) %>
+  <div class="alert alert-success center" role="alert">
+    <%= flash[:message] %>
+  </div>
+<% end %>
 <div class="container">
   <div class='row justify-content-lg-center'>
     <!-- User information -->

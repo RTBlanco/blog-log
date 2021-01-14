@@ -1,8 +1,9 @@
-
+# require 'rack-flash'
 class PostController < ApplicationController
+  # use Rack::Flash
 
   get "/posts" do 
-    @posts = Post.all
+    @posts = Post.all.reverse()
     erb :'posts/index'
   end
 
@@ -18,6 +19,7 @@ class PostController < ApplicationController
     post = Post.new(title: params[:title], content: params[:content])
     if post.save
       current_user.posts << post
+      flash[:message] = "uploaded!"
       redirect to "/posts/#{post.id}"
     else
       redirect to '/posts/new'
@@ -56,12 +58,14 @@ class PostController < ApplicationController
       post.content = params[:content]
     end
     post.save
+    flash[:message] = "Blog Updated!"
     redirect to "/posts/#{post.id}"
   end
 
   delete '/posts/:id' do
     post = Post.find(params[:id])
     post.delete
+    flash[:message] = "Blog Deleted!"
     redirect to "/account"
   end
 
