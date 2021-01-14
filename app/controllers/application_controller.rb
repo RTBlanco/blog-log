@@ -76,9 +76,15 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/follow' do 
-# TODO: make logic for when pressing the follow button
-    user = User.find(params[:follow])
-    current_user.follow(user)
+    if params.keys.first == "follow"
+      user = User.find(params[:follow])
+      current_user.follow(user)
+      redirect to "users/#{user.username}"
+    else
+      user = User.find(params[:unfollow])
+      current_user.unfollow(user)
+      redirect to "users/#{user.username}"
+    end
   end
 
   helpers do

@@ -15,4 +15,11 @@ class User < ActiveRecord::Base
     self.followees << user
     self.save
   end
+
+  def unfollow(user)
+    self.followees.delete(user)
+    user.followers.delete(self)
+    self.save
+    user.save
+  end
 end

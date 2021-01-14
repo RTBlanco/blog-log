@@ -48,7 +48,8 @@ class UserController < ApplicationController
   end
 
   get '/account/feed' do
-    # TODO: start to add the followers content
+    # binding.pry
+    @posts = current_user.followees.map {|user| user.posts}.flatten
     erb :"user/feed"
   end
 end
