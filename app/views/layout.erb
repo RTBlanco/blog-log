@@ -14,22 +14,41 @@
     <title>BlogLog</title>
   </head>
   <body>
-    <div>
-      <ul>
-        <li><a href="/posts">Blogs</a></li>
-        <% if logged_in? %>
-          <li><a href="/account/feed">Home</a></li>
-          <li><a href="/account">Account</a></li>
-          <li><a href="/account/edit">Edit Account</a></li>
-          <li><a href="/posts/new">New Post</a></li>
-          <li><a href="/logout">Logout</a></li>
-        <% else %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Sign Up</a></li>
-        <% end %>
-        <li style="float:right"><a class="active" href="">About</a></li>
-      </ul>
-    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/posts">Blogs</a>
+          </li>
+          <% if logged_in? %>
+            <li class='nav-item'>
+              <a class='nav-link' href="/account/feed">Home</a>
+            </li>
+            <li class='nav-item dropdown'>
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/account">Account</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/account/edit">Edit Account</a>
+                <a class="dropdown-item" href="/posts/new">New Post</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+          <% else %>
+            <li class='nav-item'>
+              <a class='nav-link' href="/login">Login</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href="/signup">Sign Up</a>
+            </li>
+          <% end %>
+          <li class='nav-item' style="float:right">
+            <a class='nav-link'class="active" href="">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <div class="wrapper">
 
         <%= yield %>
