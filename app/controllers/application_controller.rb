@@ -1,7 +1,6 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -29,6 +28,7 @@ class ApplicationController < Sinatra::Base
       redirect to '/posts'
     else 
       redirect to '/login'
+      flash[:message] = "Username and/or password is incorrect"
     end
   end
 
@@ -97,7 +97,7 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
      
-    def user_in_db?(username) # this one could be a User class method 
+    def user_in_db?(username) 
       User.find_by(username: username) == nil ? false : true 
     end
 

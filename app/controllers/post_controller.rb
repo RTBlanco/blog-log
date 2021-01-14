@@ -1,4 +1,6 @@
+
 class PostController < ApplicationController
+
   get "/posts" do 
     @posts = Post.all
     erb :'posts/index'
@@ -13,7 +15,6 @@ class PostController < ApplicationController
   end
   
   post '/posts/new' do 
-    # binding.pry
     post = Post.new(title: params[:title], content: params[:content])
     if post.save
       current_user.posts << post
