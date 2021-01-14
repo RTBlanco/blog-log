@@ -43,7 +43,7 @@
               <% end %>
         
               <% if logged_in? && @user.id == current_user.id %>
-                <a href="/posts/<%= post.id %>/edit"><button>Edit</button></a>
+                <a href="/posts/<%= post.id %>/edit"><button class="btn btn-outline-info" >Edit</button></a>
               <% end %>
             </div>
           </a>
