@@ -12,9 +12,9 @@
       
       <% if !logged_in? || @user.id != current_user.id %>
         <% if logged_in? && current_user.followees.find_by(id: @user.id) != @user  %>
-          <form  class="follow-btn" action="/follow" method="POST"><button type="submit" name="follow" value="<%= @user.id %>">Follow</button></form>
+          <form  class="follow-btn" action="/follow" method="POST"><button class="btn btn-outline-success" type="submit" name="follow" value="<%= @user.id %>">Follow</button></form>
         <% elsif logged_in? && current_user.followees.find_by(id: @user.id) == @user %>
-          <form  class="follow-btn" action="/follow" method="POST"><button type="submit" name="unfollow" value="<%= @user.id %>">UnFollow</button></form>
+          <form  class="follow-btn" action="/follow" method="POST"><button class="btn btn-outline-warning" type="submit" name="unfollow" value="<%= @user.id %>">UnFollow</button></form>
         <% end %>
     
       <% end %>
@@ -39,7 +39,7 @@
               <% end %>
         
               <% if logged_in? && post.user.id != current_user.id %>
-                <form action="/like" method="POST"><button type="submit" name='account' value="<%= post.id %>">Like</button></form>
+                <form action="/like" method="POST"><button class="btn btn-outline-success" type="submit" name='account' value="<%= post.id %>">Like</button></form>
               <% end %>
         
               <% if logged_in? && @user.id == current_user.id %>
