@@ -1,15 +1,19 @@
-<div>
-  <h1><%= @post.title %></h1>
-  <p>By:<a href="/users/<%= @post.user.username %>"><%= @post.user.username%></a></p>
-  <p><%= @post.content %></p>
-  <% if @post.likes > 0 %>  
-    <p>likes: <%= @post.likes %></p>
-  <% end %>
-  <% if logged_in? && @post.user.id == current_user.id %>
-      <a href="/posts/<%= @post.id %>/edit"><button>Edit</button></a>
-  <% end %>
-  
-  <% if logged_in? && @post.user.id != current_user.id %>
-    <form action="/like" method="POST"><button type="submit" name='posts/id' value="<%= @post.id %>">Like</button></form>
-  <% end %>
+<div class="container">
+  <div class="row justify-content-lg-center">
+    <div class="col-md blog-post center">
+      <h1><%= @post.title %></h1>
+      <p>By:<a href="/users/<%= @post.user.username %>"><%= @post.user.username%></a></p>
+      <p><%= @post.content %></p>
+      <% if @post.likes > 0 %>  
+        <p>likes: <%= @post.likes %></p>
+      <% end %>
+      <% if logged_in? && @post.user.id == current_user.id %>
+          <a href="/posts/<%= @post.id %>/edit"><button>Edit</button></a>
+      <% end %>
+      
+      <% if logged_in? && @post.user.id != current_user.id %>
+        <form action="/like" method="POST"><button type="submit" name='posts/id' value="<%= @post.id %>">Like</button></form>
+      <% end %>
+    </div>
+  </div>
 </div>

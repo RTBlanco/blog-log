@@ -1,36 +1,49 @@
-<div>
-  <% if !logged_in? || @user.id != current_user.id %>
-    <h1><%= @user.username %></h1>
-
-    <% if logged_in? && current_user.followees.find_by(id: @user.id) != @user  %>
-      <form action="/follow" method="POST"><button type="submit" name="follow" value="<%= @user.id %>">Follow</button></form>
-    <% elsif logged_in? && current_user.followees.find_by(id: @user.id) == @user %>
-      <form action="/follow" method="POST"><button type="submit" name="unfollow" value="<%= @user.id %>">UnFollow</button></form>
-    <% end %>
-
-  <% end %>
-
-  <p>Followers: <%= @user.followers.size %> Following: <%= @user.followees.size %> </p>
-
-  <% if @posts.empty? %>
-    <h1>Create A new a new <a href="/posts/new">Blog!</a></h1>
-  <% else %>
-    <% @posts.each do |post| %>
-      <h1><%= post.title %></h1>
-      <p><%= post.content %></p>
-
-      <% if post.likes > 0 %>  
-        <p>likes: <%= post.likes %></p>
+<div class="container">
+  <div class='row justify-content-lg-center'>
+    <!-- User information -->
+    <div class="col-lg-8">
+      <h1 id="profile-name"><%= @user.username %></h1>
+      <p class="follow-stat"><strong><%= @user.followers.size %></strong>Followers  <strong><%= @user.followees.size %></strong>Following</p>
+      
+      <% if !logged_in? || @user.id != current_user.id %>
+        <% if logged_in? && current_user.followees.find_by(id: @user.id) != @user  %>
+          <form  class="follow-btn" action="/follow" method="POST"><button type="submit" name="follow" value="<%= @user.id %>">Follow</button></form>
+        <% elsif logged_in? && current_user.followees.find_by(id: @user.id) == @user %>
+          <form  class="follow-btn" action="/follow" method="POST"><button type="submit" name="unfollow" value="<%= @user.id %>">UnFollow</button></form>
+        <% end %>
+    
       <% end %>
-
-      <% if logged_in? && post.user.id != current_user.id %>
-        <form action="/like" method="POST"><button type="submit" name='account' value="<%= post.id %>">Like</button></form>
+    
+    </div>
+  </div>
+</div>
+    <!-- user's blogs -->
+<div class="container">
+  <div class="row justify-content-lg-center'"> 
+    <div class="col-lg">
+      <% if @posts.empty? %>
+        <h1>Create A new a new <a href="/posts/new">Blog!</a></h1>
+      <% else %>
+        <% @posts.each do |post| %>
+          <a href="/posts/<%= post.id %>">
+            <div class="blog-post center ">
+              <h1><%= post.title %></h1>
+        
+              <% if post.likes > 0 %>  
+                <p style="color: black;">likes: <%= post.likes %></p>
+              <% end %>
+        
+              <% if logged_in? && post.user.id != current_user.id %>
+                <form action="/like" method="POST"><button type="submit" name='account' value="<%= post.id %>">Like</button></form>
+              <% end %>
+        
+              <% if logged_in? && @user.id == current_user.id %>
+                <a href="/posts/<%= post.id %>/edit"><button>Edit</button></a>
+              <% end %>
+            </div>
+          </a>
+        <% end %>
       <% end %>
-
-      <% if logged_in? && @user.id == current_user.id %>
-        <a href="/posts/<%= post.id %>/edit"><button>Edit</button></a>
-      <% end %>
-
-    <% end %>
-  <% end %>
+    </div>   
+  </div>
 </div>

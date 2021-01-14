@@ -97,6 +97,21 @@
     padding: 15px;
     box-shadow: 4px 6px #17a2b8
   }
+
+  .follow-stat {
+    margin-left: 21em;
+    margin-top: -38px;
+  }
+
+  .follow-btn {
+    margin-top: 2em;
+    margin-bottom: 2em
+  }
+
+  #profile-name {
+    font-size: 60px;
+    font-weight: bold;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -127,5 +142,38 @@
   h2 {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  .follow-stat {
+    margin-left: 15em;
+    margin-top: -38px;
+  }
+
+  .follow-btn {
+    margin-top: 2em;
+    margin-bottom: 2em
+  }
+
+  #profile-name {
+    font-size: 40px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  
+  .follow-stat {
+    margin-left: 15em;
+    margin-top: -38px;
+  }
+
+  .follow-btn {
+    margin-top: 2em;
+    margin-bottom: 2em
+  }
+
+  #profile-name {
+    font-size: 40px;
+    font-weight: bold;
   }
 }

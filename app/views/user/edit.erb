@@ -1,18 +1,25 @@
-<div>
-  <form action="/account/edit" method="POST">
-    <input type="hidden" name="_method" id="hidden" value="PATCH">
-    <label for="username">Username: <%= @user.username %></label>
-    <br>
-    <label for="name">Name:</label>
-    <input type="name" name="name" id="name" value="<%= @user.name %>">
-    <br>
-    <label for="password">Change Password:</label>
-    <input type="password" name="password" id="password">
-    <br>
-    <input type="submit" value="Save">
-  </form>
-  <form action="/account/edit" method="POST">
-    <input type="hidden" name="_method" id="hidden" value="DELETE">
-    <input type="submit" value="Delete">
-  </form>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <form class="blog-form" action="/account/edit" method="POST">
+        <div class="form-group">
+          <input type="hidden" name="_method" id="hidden" value="PATCH">
+          <label for="username">Username</label>
+          <input class="form-control center" type="text" placeholder="<%= @user.username %>" readonly>
+          <br>
+          <label for="name">Name:</label>
+          <input class="form-control center" type="name" name="name" id="name" value="<%= @user.name %>">
+          <br>
+          <label for="password">Change Password:</label>
+          <input class="form-control center" type="password" name="password" id="password">
+          <br>
+          <input class="btn btn-success" type="submit" value="Save">
+        </div>
+      </form>
+      <form class="blog-form" action="/account/edit" method="POST">
+        <input type="hidden" name="_method" id="hidden" value="DELETE">
+        <input class="btn btn-danger" type="submit" value="Delete">
+      </form>
+    </div>
+  </div>
 </div>

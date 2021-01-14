@@ -1,10 +1,14 @@
-<div>
-    <form action='/posts/new' method="POST">
-      <label for="title"><h3>Title:</h3></label>
-      <input type="text" name="title" id="title">
-      <label for="content"><h3>Content:</h3></label>
-      <textarea name="content" id="" cols="30" rows="10"></textarea> 
-      <br>
-      <input type="submit">
-    </form>
+<div class="container">
+  <div class="row justify-content-lg-center">
+    <div class="col-lg">
+      <form class="blog-form" action='/posts/new' method="POST">
+        <div class="form-group">
+          <input class="form-control center" type="text" name="title" id="title" placeholder="New post title here...">
+          <textarea class="form-control" name="content" id="" cols="30" rows="20" placeholder="Once upon a time....."></textarea> 
+          <br>
+          <input class="btn btn-success" type="submit">
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
