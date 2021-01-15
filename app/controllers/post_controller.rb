@@ -27,8 +27,9 @@ class PostController < ApplicationController
   end
 
   get '/posts/:id' do 
-    if post_in_db?(params[:id])
-      @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
+    if !@post.nil? #post_in_db?(params[:id])
+      # @post = Post.find(params[:id])
       erb :"posts/show"
     else
       redirect to '/posts'
@@ -36,15 +37,21 @@ class PostController < ApplicationController
   end
 
   get '/posts/:id/edit' do
-    if post_in_db?(params[:id])
-      @post = Post.find(params[:id])
-      if @post.user == current_user
-        erb :'posts/edit'
+    if logged_in?
+      @post = Post.find_by(id: params[:id])
+      if !@post.nil?
+      # if post_in_db?(params[:id])
+      #   @post = Post.find(params[:id])
+        if @post.user == current_user
+          erb :'posts/edit'
+        else
+          redirect to "/post/#{@post.id}"
+        end
       else
-        redirect to "/post/#{@post.id}"
+        redirect to "/posts"
       end
     else
-      redirect to "/posts"
+      redirect to '/posts'
     end
   end
 

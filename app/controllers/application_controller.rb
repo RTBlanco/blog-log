@@ -45,12 +45,12 @@ class ApplicationController < Sinatra::Base
   post '/registration' do
     user = User.new(username: params[:username], password: params[:password], name: params[:name])
 
-    if !user_in_db?(user.username) && user.save
+    if User.find_by(username: user.username).nil? && user.save
       session[:user_id] = user.id
       redirect to '/posts'
     else
       redirect to '/signup'
-    end   
+    end
   end
 
   get '/logout' do
@@ -98,13 +98,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-     
-    def user_in_db?(username) 
-      User.find_by(username: username) == nil ? false : true 
-    end
-
-    def post_in_db?(post_id)
-      Post.find_by(id: post_id) == nil ? false :true
-    end
+    
   end  
 end

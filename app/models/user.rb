@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
   has_many :followers, through: :following_users
 
-  has_many :posts
+  has_many :posts, :dependent => :delete_all
 
   def follow(user)
     self.followees << user
