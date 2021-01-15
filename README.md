@@ -10,7 +10,7 @@ This is will download all the correct gems needed. After everything is correctly
   
     $ shotgun
   
-After the server has correctly started navigate to http://localhost:9393
+After the server has correctly started, navigate to http://localhost:9393
 
 ## Contributing
 
