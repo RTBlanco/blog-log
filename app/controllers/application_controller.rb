@@ -29,8 +29,8 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect to '/posts'
     else 
-      redirect to '/login'
       flash[:message] = "Username and/or password is incorrect"
+      redirect to '/login'
     end
   end
 
