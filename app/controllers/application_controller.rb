@@ -49,6 +49,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect to '/posts'
     else
+      flash[:message] = "Username is already in use."
       redirect to '/signup'
     end
   end
