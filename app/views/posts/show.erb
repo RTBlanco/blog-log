@@ -13,7 +13,7 @@
         <p>likes: <%= @post.likes %></p>
       <% end %>
       <% if logged_in? && @post.user.id == current_user.id %>
-          <a href="/posts/<%= @post.id %>/edit"><button>Edit</button></a>
+          <a href="/posts/<%= @post.id %>/edit"><button class="btn btn-outline-info">Edit</button></a>
       <% end %>
       
       <% if logged_in? && @post.user.id != current_user.id %>

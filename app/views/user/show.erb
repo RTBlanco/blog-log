@@ -27,7 +27,7 @@
   <div class="row justify-content-lg-center'"> 
     <div class="col-lg">
       <% if logged_in? && @posts.empty? %>
-        <h1>Create A new a new <a href="/posts/new">Blog!</a></h1>
+        <h1>Create A new <a href="/posts/new">Blog!</a></h1>
       <% else %>
         <% @posts.each do |post| %>
           <a href="/posts/<%= post.id %>">
