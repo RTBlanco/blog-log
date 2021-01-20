@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validates :name, presence: true
+  validates :username, presence: true
 
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users
