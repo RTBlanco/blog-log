@@ -1,6 +1,5 @@
-# require 'rack-flash'
+
 class PostController < ApplicationController
-  # use Rack::Flash
 
   get "/posts" do 
     @posts = Post.all.reverse()
@@ -28,8 +27,7 @@ class PostController < ApplicationController
 
   get '/posts/:id' do 
     @post = Post.find_by(id: params[:id])
-    if !@post.nil? #post_in_db?(params[:id])
-      # @post = Post.find(params[:id])
+    if !@post.nil?
       erb :"posts/show"
     else
       redirect to '/posts'
@@ -40,8 +38,6 @@ class PostController < ApplicationController
     if logged_in?
       @post = Post.find_by(id: params[:id])
       if !@post.nil?
-      # if post_in_db?(params[:id])
-      #   @post = Post.find(params[:id])
         if @post.user == current_user
           erb :'posts/edit'
         else
