@@ -41,7 +41,7 @@ class PostController < ApplicationController
         if @post.user == current_user
           erb :'posts/edit'
         else
-          redirect to "/post/#{@post.id}"
+          redirect to "/posts/#{@post.id}"
         end
       else
         redirect to "/posts"
